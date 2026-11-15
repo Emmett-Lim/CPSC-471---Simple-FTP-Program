@@ -1,40 +1,42 @@
-CPSC471 Programming Assignment 1 - Simple FTP
+# CPSC471 Programming Assignment 1 - Simple FTP
 ==================================================
 [ Names / emails ]
 - Emmett Lim - emmettklim@csu.fullerton.edu
 
 [ Language ] 
-- Python 3
+- Python
 
-How to run
+## How to run
 ----------
 1. Start the server (in the folder whose files you want to serve):
-       python3 serv.py <PORT>          e.g.  python3 serv.py 1234
+       python serv.py <PORT>          e.g.  python serv.py 1234
 2. Start the client (ideally from a different folder):
-       python3 cli.py <server> <PORT>  e.g.  python3 cli.py localhost 1234
+       python cli.py <server> <PORT>  e.g.  python cli.py localhost 1234
 3. At the ftp> prompt:  ls | get <file> | put <file> | quit
 
-Notes
+### Notes
 -----
+- Depending on how you donwloaded python onto your OS, you use either python, python3, or py to run the script files.
 - Server handles one client at a time.
 - Files are transferred in binary mode, so any file type works.
 - Files go to/from the current directory of the server and client.
 
-PROTOCOL DESIGN
+## PROTOCOL DESIGN
 ===============
-Framing (used on both channels): every message is
+Framing (used on both channels): every message is<br>
     [10 ASCII bytes: data length, zero-padded] [data]
+
 The receiver reads exactly 10 bytes, parses the length, then loops on
 recv() until that many bytes arrive. Senders loop on send() until all
 bytes are sent. This handles partial sends/receives and large files.
 
-Control channel (client's first connection; lasts the whole session)
-  Client -> Server (text):
-      "ls <dataPort>"
-      "get <dataPort> <filename>"
-      "put <dataPort> <filename>"
-      "quit"
-  Server -> Client (text, one reply per ls/get/put):
+Control channel (client's first connection; lasts the whole session)<br>
+  Client -> Server (text):<br>
+      "ls <dataPort>"<br>
+      "get <dataPort> <filename>"<br>
+      "put <dataPort> <filename>"<br>
+      "quit"<br>
+  Server -> Client (text, one reply per ls/get/put):<br>
       "SUCCESS"                or  "FAILURE <reason>"
 
 Data channel (one per ls/get/put; closed after the transfer)
