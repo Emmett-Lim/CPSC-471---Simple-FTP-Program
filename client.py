@@ -82,8 +82,6 @@ def lsCmd(ctrlSock):
         listener.close()
         return
     
-    # Server connects to this client and read the listing from the data channel
-    #dataSock, _ = listener.accept()
     dataSock = listener.accept()[0]
     listing = recvMsg(dataSock).decode()
     dataSock.close()
@@ -103,7 +101,7 @@ def getCmd(ctrlSock, fileName):
         listener.close()
         return
     
-    dataSock, _ = listener.accept()
+    dataSock = listener.accept()[0]
     fileData = recvMsg(dataSock)
     dataSock.close()
     listener.close()

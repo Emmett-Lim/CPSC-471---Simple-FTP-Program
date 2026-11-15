@@ -95,7 +95,6 @@ def doGet(ctrlSock, clientIP, dataPort, fileName):
     
     sendMsg(ctrlSock, "SUCCESS")
 
-    # Read the binary file and send it over the data channel
     with open(filePath, "rb") as f:
         fileData = f.read()
     
@@ -112,7 +111,7 @@ def doPut(ctrlSock, clientIP, dataPort, fileName):
     sendMsg(ctrlSock, "SUCCESS")
 
     dataSock = openDataChannel(clientIP, dataPort)
-    fileData = recvMsg(dataSock) # (padding + data)
+    fileData = recvMsg(dataSock) # Remember: (padding + data)
     dataSock.close()
 
     if fileData is None:
