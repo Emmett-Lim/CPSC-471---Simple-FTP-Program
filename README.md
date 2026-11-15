@@ -13,7 +13,7 @@ python server.py [port] #e.g. python server.py 1234
 ```
 3. Start the client (ideally from a different folder):
 ```bash
-python client.py <server> <PORT> #e.g. python client.py localhost 1234
+python client.py [server] [port] #e.g. python client.py localhost 1234
 ```
 4. At the ftp> prompt:  ls | get [file] | put [file] | quit
 
