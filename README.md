@@ -25,11 +25,12 @@ The receiver reads exactly 10 bytes, parses the length, then loops on
 recv() until that many bytes arrive. Senders loop on send() until all
 bytes are sent. This handles partial sends/receives and large files.
 
-Control channel (client's first connection; lasts the whole session)<br>
-Client -> Server (text):<br>
-- ls [dataPort]"<br>
-- "get [dataPort] [filename]"<br>
-- "put [dataPort] [filename]"<br>
+Control channel (client's first connection; lasts the whole session)
+
+Client -> Server (text):
+- "ls <dataPort>"<br>
+- "get <dataPort> [filename]"<br>
+- "put <dataPort> [filename]"<br>
 - "quit"<br>
 
 Server -> Client (text, one reply per ls/get/put):<br>
