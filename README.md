@@ -7,18 +7,22 @@
 
 ## How to run
 1. Start the server (in the folder whose files you want to serve):
-       python serv.py <PORT>          e.g.  python serv.py 1234
+```bash
+python server.py [port] #e.g. python server.py 1234
+```
 2. Start the client (ideally from a different folder):
-       python cli.py <server> <PORT>  e.g.  python cli.py localhost 1234
-3. At the ftp> prompt:  ls | get <file> | put <file> | quit
+```bash
+python client.py <server> <PORT> #e.g. python client.py localhost 1234
+```
+3. At the ftp> prompt:  ls | get [file] | put [file] | quit
 
-### Notes
-- Depending on how you donwloaded python onto your OS, you use either python, python3, or py to run the script files.
-- Server handles one client at a time.
-- Files are transferred in binary mode, so any file type works.
-- Files go to/from the current directory of the server and client.
+> [!NOTE]
+> - Depending on how you downloaded python onto your OS, you use either python, python3, or py to run the script files.
+> - Server handles one client at a time.
+> - Files are transferred in binary mode, so any file type works.
+> - Files go to/from the current directory of the server and client.
 
-## PROTOCOL DESIGN
+## Protocol Design
 Framing (used on both channels): every message is [10 ASCII bytes: data length, zero-padded] [data]
 
 The receiver reads exactly 10 bytes, parses the length, then loops on
@@ -47,4 +51,13 @@ Data channel (one per ls/get/put; closed after the transfer)
      client, put: client->server) or the listing (ls: server->client).
   6. Sender closes the data socket; client closes its listener.
 
-[ Examples ]
+## Examples
+1. This gets text file "servertest.txt" from ServerDir and puts it into ClientDir
+```bash
+get servertest.txt
+```
+
+2. This puts text file "clienttest.txt" from ClientDir to ServerDir
+```bash
+put clienttest.txt
+```
