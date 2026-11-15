@@ -6,15 +6,16 @@
 - Python
 
 ## How to run
-1. Start the server (in the folder whose files you want to serve):
+1. Place a text file in either ClientDir or ServerDir or even both (Make sure to add text inside the text file!).
+2. Start the server (in the folder whose files you want to serve):
 ```bash
 python server.py [port] #e.g. python server.py 1234
 ```
-2. Start the client (ideally from a different folder):
+3. Start the client (ideally from a different folder):
 ```bash
 python client.py <server> <PORT> #e.g. python client.py localhost 1234
 ```
-3. At the ftp> prompt:  ls | get [file] | put [file] | quit
+4. At the ftp> prompt:  ls | get [file] | put [file] | quit
 
 > [!NOTE]
 > - Depending on how you downloaded python onto your OS, you use either python, python3, or py to run the script files.
