@@ -1,7 +1,10 @@
-CPSC471 Programming Assignment 1 - Simplified FTP
+CPSC471 Programming Assignment 1 - Simple FTP
 ==================================================
-Names / emails: Emmett Lim - emmettklim@csu.fullerton.edu
-Language: Python 3
+[ Names / emails ]:
+- Emmett Lim - emmettklim@csu.fullerton.edu
+
+[ Language ] 
+- Python 3
 
 How to run
 ----------
@@ -44,11 +47,11 @@ Data channel (one per ls/get/put; closed after the transfer)
      client, put: client->server) or the listing (ls: server->client).
   6. Sender closes the data socket; client closes its listener.
 
-Diagram (get example)
-  Client                                  Server
-    | --- "get 51234 a.txt" (control) -->  |
-    |                                      | file exists?
-    | <---------- "SUCCESS" (control) ---- |
-    | <======= server connects to 51234 == |  (data channel)
-    | <== [0000000012][file bytes] ======= |
-    |        both sides close data channel |
+Diagram (get example)<br>
+  Client                                  Server<br>
+    | --- "get 51234 a.txt" (control) -->  |<br>
+    |                                      | file exists?<br>
+    | <---------- "SUCCESS" (control) ---- |<br>
+    | <======= server connects to 51234 == |  (data channel)<br>
+    | <== [0000000012][file bytes] ======= |<br>
+    |        both sides close data channel |<br>
