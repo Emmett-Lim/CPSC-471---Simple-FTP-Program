@@ -19,21 +19,22 @@
 - Files go to/from the current directory of the server and client.
 
 ## PROTOCOL DESIGN
-Framing (used on both channels): every message is<br>
->> [10 ASCII bytes: data length, zero-padded] [data]
+Framing (used on both channels): every message is [10 ASCII bytes: data length, zero-padded] [data]
 
 The receiver reads exactly 10 bytes, parses the length, then loops on
 recv() until that many bytes arrive. Senders loop on send() until all
 bytes are sent. This handles partial sends/receives and large files.
 
 Control channel (client's first connection; lasts the whole session)<br>
-> Client -> Server (text):<br>
->>> ls [dataPort]"<br>
->>> "get [dataPort] [filename]"<br>
->>> "put [dataPort] [filename]"<br>
->>> "quit"<br>
-> Server -> Client (text, one reply per ls/get/put):<br>
-      "SUCCESS"                or  "FAILURE [reason]"
+Client -> Server (text):<br>
+- ls [dataPort]"<br>
+- "get [dataPort] [filename]"<br>
+- "put [dataPort] [filename]"<br>
+- "quit"<br>
+
+Server -> Client (text, one reply per ls/get/put):<br>
+- "SUCCESS"
+- "FAILURE [reason]"
 
 Data channel (one per ls/get/put; closed after the transfer)
   1. Client binds a listening socket to port 0 (ephemeral port).
