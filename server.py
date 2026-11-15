@@ -146,8 +146,6 @@ while True:
         if msg is None:
             break
 
-        # Command format: "ls <dataPort>", "get <dataPort> [file]",
-        # "put <dataPort> [file]", or "quit"
         parts = msg.decode().split(" ", 2)
         cmd = parts[0]
 
